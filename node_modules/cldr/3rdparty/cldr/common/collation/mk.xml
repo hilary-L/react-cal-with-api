@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
+<!--
+Copyright © 1991-2013 Unicode, Inc.
+CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/)
+For terms of use, see http://www.unicode.org/copyright.html
+-->
+<ldml>
+    <identity>
+        <version number="$Revision: 11056 $"/>
+        <generation date="$Date: 2014-11-16 18:56:17 -0600 (Sun, 16 Nov 2014) $"/>
+        <language type="mk"/> 
+    </identity>
+	<collations >
+		<collation type="standard">
+			<settings reorder="Cyrl"/>
+			<suppress_contractions>[Ии]</suppress_contractions>
+			<cr><![CDATA[
+			    &ԃ<ѓ<<<Ѓ
+			    &ћ<ќ<<<Ќ
+			]]></cr>
+		</collation>
+	</collations>
+</ldml>

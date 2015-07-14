@@ -1,0 +1,218 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+#app {
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  font-family: "Muli", sans-serif;
+}
+#app h2 {
+  font-size: 1.2rem;
+  color: white;
+}
+#app .month {
+  border: 1px solid black;
+  width: 68%;
+  margin-right: 1%;
+  float: left;
+}
+#app .task-list {
+  border: 1px solid black;
+  width: 30%;
+  float: left;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+#app .task-list .task-list-header h2 {
+  margin: 0;
+  border-bottom: 1px solid white;
+  background-color: #00B9FF;
+  padding: 0.5rem;
+}
+#app .task-list h3 {
+  margin-left: 1rem;
+}
+#app .task-list h3, #app .task-list span.legend {
+  text-align: left;
+  font-size: 0.875rem;
+  color: #919092;
+  margin: 0.5rem 2rem;
+  padding-left: 0.25rem;
+}
+#app .task-list h3.occasion, #app .task-list span.legend.occasion {
+  border-left: 8px solid #FCB258;
+}
+#app .task-list h3.task, #app .task-list span.legend.task {
+  border-left: 8px solid #8C88FC;
+}
+#app .task-list h3.task.help, #app .task-list span.legend.task.help {
+  border-left: 8px solid #FA3E67;
+}
+#app .task-list .occasions h2 {
+  background-color: #FCB258;
+  margin: 0.5rem;
+}
+#app .task-list .tasks h2 {
+  background-color: #BA77FF;
+  margin: 0.5rem;
+}
+#app .task-list span.legend {
+  display: inline-block;
+  font-size: 0.6rem;
+}
+#app .task-search {
+  border: 1px solid black;
+  width: 30%;
+  float: left;
+  text-align: center;
+}
+#app .task-search .task-search-header h2 {
+  margin: 0 0 0.5rem 0;
+  border-bottom: 1px solid white;
+  background-color: #00B9FF;
+  padding: 0.5rem;
+}
+#app .task-search input {
+  margin: 0.5rem;
+  width: 80%;
+  height: 2rem;
+  border: 2px solid #E0DFE1;
+  border-radius: 4px;
+  padding-left: 0.25rem;
+}
+#app .task-search h2.results {
+  margin: 0.5rem;
+  background-color: #50D2C2;
+}
+#app .task-search ul {
+  text-align: left;
+  padding: 1rem 2rem;
+  list-style: none;
+}
+#app .task-search ul li {
+  border-left: 8px solid #E0DFE1;
+  padding-left: 0.5rem;
+  color: #919092;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+#app .month-header {
+  text-align: center;
+  border-bottom: 1px solid white;
+  color: white;
+  background-color: #00B9FF;
+  padding: 0.5rem;
+  position: relative;
+}
+#app .month-header span.left {
+  top: 0.25rem;
+  left: 0.5rem;
+  font-size: 1.5rem;
+  position: absolute;
+}
+#app .month-header span.right {
+  top: 0.25rem;
+  right: 0.5rem;
+  font-size: 1.5rem;
+  position: absolute;
+}
+#app .month-header h2 {
+  margin: 0.5rem;
+  display: inline;
+}
+#app #days-header {
+  border-bottom: 1px solid black;
+}
+#app #days-header ul {
+  padding: 0;
+  margin: 0;
+  width: auto;
+}
+#app #days-header ul li {
+  padding: 0.5rem 0;
+  display: inline-block;
+  width: 14.28%;
+  height: auto;
+  text-align: center;
+  border-right: 1px solid #000;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #1D1D26;
+}
+#app #days-header ul li:last-child {
+  border-right: none;
+}
+#app .day {
+  height: 150px;
+  width: 14.28%;
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+  border-right: 1px dotted black;
+  border-bottom: 1px dotted black;
+  margin-bottom: -0.25rem;
+}
+#app .day.last {
+  border-right: none;
+}
+#app .day.today span.num {
+  background-color: #BA77FF;
+  color: white;
+}
+#app .day.selected span.num {
+  background-color: #00B9FF;
+  color: white;
+}
+#app .day span.num {
+  display: inline-block;
+  width: 1.6rem;
+  height: 1.3rem;
+  padding-top: 0.3rem;
+  text-align: center;
+  color: #919092;
+  background-color: #F4F4F4;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+#app .day .holidays {
+  position: absolute;
+  bottom: 5.0rem;
+  width: 95%;
+}
+#app .day .holidays h3 {
+  margin: 0 0 0.1rem 0;
+  text-align: left;
+  font-size: 0.6rem;
+  background-color: #E0DFE1;
+  color: #919092;
+  padding-left: 0.5rem;
+  border-left: 5px solid #71DCCF;
+}
+#app .day .info {
+  position: absolute;
+  bottom: 1.0rem;
+  width: 95%;
+}
+#app .day .info h3 {
+  margin: 0 0 0.1rem 0;
+  text-align: left;
+  font-size: 0.6rem;
+  background-color: #E0DFE1;
+  color: #919092;
+  padding-left: 0.5rem;
+}
+#app .day .info h3.occasion {
+  border-left: 5px solid #FCB258;
+}
+#app .day .info h3.task {
+  border-left: 5px solid #8C88FC;
+}
+#app .day .info h3.task.help {
+  border-left: 5px solid #FA3E67;
+}
