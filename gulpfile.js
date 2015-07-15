@@ -17,7 +17,7 @@ var path = {
 	DEST_BUILD: 'public/js',
 	DEST_SRC: 'public/src',
 	DEST_CSS: 'public/css',
-	ENTRY_POINT: './src/js/components/Cal.js'
+	ENTRY_POINT: './src/js/components/CalApp.js'
 };
 
 gulp.task('copy', function() {
@@ -75,8 +75,8 @@ gulp.task('build', function() {
 gulp.task('replaceHTML', function() {
 	gulp.src(path.HTML)
 	.pipe(htmlreplace({
-		'css': './css/app.css',
-		'js': './js/' + path.MINIFIED_OUT
+		'css': '/css/app.css',
+		'js': '/js/' + path.MINIFIED_OUT
 		}))
 	.pipe(gulp.dest(path.DEST));
 });

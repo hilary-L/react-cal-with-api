@@ -28,6 +28,10 @@
     "moment": "^2.10.3",
     "moment-holidays": "0.0.3",
     "node-calendar": "^0.1.4",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "superagent": "^0.21.0",
+    "react-router": "latest",
+    "jest": "latest",
+    "object-assign": "latest"
   }
 }
