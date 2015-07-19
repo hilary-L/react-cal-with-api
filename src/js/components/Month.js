@@ -8,6 +8,8 @@ var calendarActions = require('../actions/calendarActions');
 
 var Month = React.createClass({
 	handleUpdateMonth: function(update) {
+		console.log('In click handler');
+		console.log('update: ' + update)
 		calendarActions.updateMonth(update);
 	},
 	render: function() {
@@ -22,10 +24,43 @@ var Month = React.createClass({
 				monthName: moment(item).format('MMMM'),
 				num: moment(item).format('D'),
 				holiday: moment(item).holiday(),
+				moment: moment(item).format('MMMM D YYYY')
 				
 				}
 			)
 		});
+
+		var formattedEvents = this.props.events.map(function(item) {
+			var testing = moment(item.date).format('MMMM D YYYY');
+			return(
+				{
+					category: item.category,
+					content: item.content,
+					help: item.help,
+					moment: testing,
+				}
+			)
+		});
+
+		var newDays = days.map(function(day) {
+
+			var matchedTasks = formattedEvents.filter(function(fe) {
+				return fe.moment == day.moment
+			})
+
+			return (
+				{
+					year: day.year,
+					monthNum: day.monthNum,
+					monthName: day.monthName,
+					num: day.num,
+					holiday: day.holiday,
+					tasks: matchedTasks
+				}
+			)
+
+		});
+
 
 		var tasks = days.map(function(day, index) {
 			if (index % 2 == 0) {

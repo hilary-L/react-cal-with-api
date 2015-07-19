@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 var moment = require('moment');
 var Month = require('./Month');
 var calendarStore = require('../stores/calendarStore');
@@ -9,7 +9,8 @@ var Cal = React.createClass({
 		return ({
 			moment: calendarStore.getMoment(),
 			selectedDay: calendarStore.getSelected(),
-			search: calendarStore.getSearch()
+			search: calendarStore.getSearch(),
+			events: calendarStore.getEvents()
 		})
 	},
 	componentDidMount: function() {
@@ -22,7 +23,8 @@ var Cal = React.createClass({
 		this.setState({
 			moment: calendarStore.getMoment(),
 			selectedDay: calendarStore.getSelected(),
-			search: calendarStore.getSearch()
+			search: calendarStore.getSearch(),
+			events: calendarStore.getEvents()
 		});
 	},
 	render: function() {
@@ -30,7 +32,7 @@ var Cal = React.createClass({
 			<div className="container">
 				<div className="row">
 					<div>
-						<Month moment={this.state.moment} selectedDay={this.state.selectedDay} search={this.state.search} />
+						<Month moment={this.state.moment} selectedDay={this.state.selectedDay} search={this.state.search} events={this.state.events} />
 					</div>
 				</div>
 			</div>
@@ -38,6 +40,5 @@ var Cal = React.createClass({
 	}
 });
 
-React.render(<Cal />, document.getElementById('app'));
 
 module.exports = Cal;

@@ -23,7 +23,8 @@ var _store = {
 		tasks: [],
 		occasions: []
 	},
-	search: ''
+	search: '',
+	events: []
 };
 
 var changeSearch = function(data) {
@@ -75,6 +76,11 @@ var updateMonth = function(update) {
 
 };
 
+var updateEvents = function(events) {
+	_store.events = events.events;
+	console.log(_store.events);
+}
+
 var calendarStore = objectAssign({}, EventEmitter.prototype, {
 	addChangeListener: function(cb) {
 		this.on(CHANGE_EVENT, cb);
@@ -90,22 +96,28 @@ var calendarStore = objectAssign({}, EventEmitter.prototype, {
 	},
 	getSelected: function() {
 		return _store.selectedDay;
+	},
+	getEvents: function() {
+		return _store.events;
 	}
 });
 
-AppDispatcher.register(function(payload){
-	var action = payload.action;
+calendarStore.dispatchToken = AppDispatcher.register(function(action){
 	switch(action.actionType){
-		case appConstants.CHANGE_SEARCH:
+		case appConstants.ActionTypes.CHANGE_SEARCH:
 			changeSearch(action.data);
 			calendarStore.emit(CHANGE_EVENT);
 			break;
-		case appConstants.UPDATE_MONTH:
+		case appConstants.ActionTypes.UPDATE_MONTH:
 			updateMonth(action.data);
 			calendarStore.emit(CHANGE_EVENT);
 			break;
-		case appConstants.SELECT_DAY:
+		case appConstants.ActionTypes.SELECT_DAY:
 			selectDay(action.data);
+			calendarStore.emit(CHANGE_EVENT);
+			break;
+		case appConstants.ActionTypes.RECEIVE_EVENTS:
+			updateEvents(action.json);
 			calendarStore.emit(CHANGE_EVENT);
 			break;
 		default:

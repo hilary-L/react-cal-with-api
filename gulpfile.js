@@ -4,7 +4,7 @@ var htmlreplace = require('gulp-html-replace');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var reactify = require('reactify');
+var babelify = require('babelify');
 var streamify = require('gulp-streamify');
 var compass = require('gulp-compass');
 
@@ -31,7 +31,7 @@ gulp.task('watch', function() {
 
 	var watcher = watchify(browserify({
 		entries: [path.ENTRY_POINT],
-		transform: [reactify],
+		transform: [babelify],
 		debug: true,
 		cache: {}, packageCache: {}, fullPaths: true
 		}));
@@ -64,7 +64,7 @@ gulp.task('default', ['watch', 'compass']);
 gulp.task('build', function() {
 	browserify({
 		entries: [path.ENTRY_POINT],
-		transform: [reactify]
+		transform: [babelify]
 		})
 	.bundle()
 	.pipe(source(path.MINIFIED_OUT))

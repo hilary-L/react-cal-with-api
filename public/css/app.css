@@ -216,3 +216,35 @@ html {
 #app .day .info h3.task.help {
   border-left: 5px solid #FA3E67;
 }
+#app .login-form-box {
+  width: 30%;
+  margin: 15% auto 0;
+  border: 2px solid #00B9FF;
+  border-radius: 4px;
+}
+#app .login-form-box h1 {
+  color: white;
+  background-color: #00B9FF;
+  font-family: Muli;
+  text-align: center;
+  margin-top: 0;
+}
+#app .login-form-box input {
+  width: 50%;
+  display: block;
+  margin: 0 auto 1rem;
+}
+#app .login-form-box button {
+  background-color: white;
+  border: 2px solid #00B9FF;
+  border-radius: 4px;
+  color: #00B9FF;
+  font-family: Muli;
+  display: block;
+  margin: 0 auto;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.2rem;
+}
+#app .login-form-box p {
+  text-align: center;
+}

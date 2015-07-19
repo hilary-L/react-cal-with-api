@@ -1,17 +1,12 @@
-var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
+import React from 'react';
+import { Router, Route } from 'react-router';
+import HashHistory from 'react-router/lib/HashHistory';
+
 var sessionStore = require('../stores/sessionStore');
 var Cal = require('./Cal');
 var LoginPage = require('./LoginPage');
+var Month = require('./Month');
 
-var routes = (
-	<Route handler={CalApp}>
-		<Route name="login" handler={LoginPage}/>
-		<Route name="calendar" handler={Cal}/>
-	</Route>
-);
 
 var CalApp = React.createClass({
 	getInitialState: function() {
@@ -28,22 +23,28 @@ var CalApp = React.createClass({
 		sessionStore.removeChangeListener(this._onChange);
 	},
 	_onChange: function() {
-		this.setState({
-			isLoggedIn: sessionStore.isLoggedIn()
-		});
+		//this.setState({
+			//isLoggedIn: sessionStore.isLoggedIn()
+		//});
 	},
 	render: function() {
 
 		return (
 			<div className="app">
-				<RouteHandler/>
+				{this.props.children}
 			</div>
 		)
 	}
 });
 
-Router.run(routes, Router.HashLocation, function(Root) {
-	React.render(<Root/>, document.getElementById('app'));
-});
+
+React.render((
+	<Router history={new HashHistory}>
+		<Route path="/" component={CalApp}>
+			<Route path="login" component={LoginPage}/>
+			<Route path="cal" component={Cal}/>
+		</Route>
+	</Router>
+	), document.getElementById('app'));
 
 module.exports = CalApp;

@@ -2,6 +2,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var appConstants = require('../constants/appConstants');
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
+var WebAPIUtils = require('../utils/WebAPIUtils');
 
 var CHANGE_EVENT = 'change';
 
@@ -14,8 +15,8 @@ var _store = {
 };
 
 var setSession = function(json) {
-	_store.accessToken = json.access_token;
-	_store.email = json.email;
+	_store.accessToken = json.session.access_token;
+	_store.email = json.session.email;
 }
 
 var setErrors = function(errors) {
@@ -44,14 +45,16 @@ var sessionStore = objectAssign({}, EventEmitter.prototype, {
 	}
 });
 
-sessionStore.dispatchToken = AppDispatcher.register(function(payload){
-	var action = payload.action;
+sessionStore.dispatchToken = AppDispatcher.register(function(action){
 	switch(action.actionType){
-		case appConstants.LOGIN_RESPONSE:
-			if (action.json && action.json.access_token) {
+		case appConstants.ActionTypes.LOGIN_RESPONSE:
+			if (action.json && action.json.session.access_token) {
 				setSession(action.json);
 				sessionStorage.setItem('accessToken', _store.accessToken);
 				sessionStorage.setItem('email', _store.email);
+				console.log('set session!');
+				console.log(_store.accessToken);
+				WebAPIUtils.getEvents();
 			}
 			else if (action.errors) {
 				setErrors(action.errors);

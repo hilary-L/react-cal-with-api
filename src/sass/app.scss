@@ -286,6 +286,44 @@ html {
 
 	    
 	}
+
+    .login-form-box {
+        width: 30%;
+        margin: 15% auto 0;
+        border: 2px solid #00B9FF;
+        border-radius: 4px;
+
+        h1 {
+            color: white;
+            background-color: #00B9FF;
+            font-family: Muli;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        input {
+            width: 50%;
+            display: block;
+            margin: 0 auto 1rem;
+        }
+
+        button {
+            background-color: white;
+            border: 2px solid #00B9FF;
+            border-radius: 4px;
+            color: #00B9FF;
+            font-family: Muli;
+            display: block;
+            margin: 0 auto;
+            padding: 0.5rem 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        p {
+            text-align: center;
+        }
+
+    }
     
 }
 

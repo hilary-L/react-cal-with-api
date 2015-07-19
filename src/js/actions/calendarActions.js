@@ -3,13 +3,13 @@ var appConstants = require('../constants/appConstants');
 
 var calendarActions = {
 	changeSearch: function(search) {
-		AppDispatcher.handleViewAction({
+		AppDispatcher.dispatch({
 			actionType: appConstants.ActionTypes.CHANGE_SEARCH,
 			data: search
 		});
 	},
 	selectDay: function(index, day) {
-		AppDispatcher.handleViewAction({
+		AppDispatcher.dispatch({
 			actionType: appConstants.ActionTypes.SELECT_DAY,
 			data: {
 				year: day.year,
@@ -21,26 +21,31 @@ var calendarActions = {
 		});
 	},
 	updateMonth: function(update) {
-		AppDispatcher.handleViewAction({
+		AppDispatcher.dispatch({
 			actionType: appConstants.ActionTypes.UPDATE_MONTH,
 			data: update
 		});
 	},
 	login: function(credentials) {
-		console.log("Login request!");
-		AppDispatcher.handleViewAction({
+		AppDispatcher.dispatch({
 			actionType: appConstants.ActionTypes.LOGIN_REQUEST,
 			data: credentials
 		});
 		
 	},
 	receiveLogin: function(json, errors) {
-		console.log("Received login!");
-		AppDispatcher.handleServerAction({
+		AppDispatcher.dispatch({
 			actionType: appConstants.ActionTypes.LOGIN_RESPONSE,
 			json: json,
 			errors: errors
 		});
+	},
+	receiveEvents: function(json, errors) {
+		AppDispatcher.dispatch({
+			actionType: appConstants.ActionTypes.RECEIVE_EVENTS,
+			json: json,
+			errors: errors
+		})
 	}
 };
 
