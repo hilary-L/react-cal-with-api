@@ -21,8 +21,7 @@ var _store = {
 		year: null,
 		month: null,
 		num: null,
-		tasks: [],
-		occasions: []
+		tasks: []
 	},
 	search: '',
 	events: []
@@ -38,7 +37,6 @@ var selectDay = function(data) {
 		monthName: data.monthName,
 		num: data.num,
 		tasks: data.tasks,
-		occasions: data.occasions
 	}
 
 };

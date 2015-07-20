@@ -13,7 +13,7 @@ var TaskList = React.createClass({
 					<h2>List for {this.props.selectedDay.monthName} {this.props.selectedDay.num}</h2>
 					<div className="occasions">
 						<h2>Occasions</h2>
-						<Occasions occasions={this.props.selectedDay.occasions} />
+						<Occasions occasions={this.props.selectedDay.tasks} />
 					</div>
 					<div className="tasks">
 						<h2>Tasks</h2>

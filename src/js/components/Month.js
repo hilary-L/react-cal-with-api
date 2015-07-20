@@ -8,8 +8,6 @@ var calendarActions = require('../actions/calendarActions');
 
 var Month = React.createClass({
 	handleUpdateMonth: function(update) {
-		console.log('In click handler');
-		console.log('update: ' + update)
 		calendarActions.updateMonth(update);
 	},
 	render: function() {
@@ -64,74 +62,6 @@ var Month = React.createClass({
 
 		console.log(newDays);
 
-
-		var tasks = days.map(function(day, index) {
-			if (index % 2 == 0) {
-				return( {
-					year: day.year,
-					monthNum: day.monthNum,
-					monthName: day.monthName,
-					num: day.num,
-					holiday: day.holiday,
-					occasions: [],
-					tasks: [
-						{
-							taskName: 'Ride to hockey',
-							help: false
-						}
-					]
-				})
-			}
-			else if (index % 3 == 0 ) {
-				return( {
-					year: day.year,
-					monthNum: day.monthNum,
-					monthName: day.monthName,
-					num: day.num,
-					holiday: day.holiday,
-					occasions: [
-						{
-							occasionName: 'Birthday'
-						}
-					],
-					tasks: [
-						{
-							taskName: 'Walk the dogs',
-							help: false
-
-						},
-						{
-							taskName: 'Dinner for tonight',
-							help: true
-						}
-					]
-				})
-
-			}
-			else {
-				return ( {
-					year: day.year,
-					monthNum: day.monthNum,
-					monthName: day.monthName,
-					num: day.num,
-					holiday: day.holiday,
-					occasions: [],
-					tasks: [
-						{
-							taskName: 'Doctor appt',
-							help: false
-						},
-						{
-							taskName: 'Mow lawn',
-							help: true
-						}
-					]
-
-				})
-				
-			}
-		});
-
 		return (
 			<div>
 				<div className="month">
@@ -149,13 +79,13 @@ var Month = React.createClass({
 								<li>Saturday</li>
 							</ul>
 					</div>
-					<Days moment={this.props.moment} days={tasks} selectedDay={this.props.selectedDay} />
+					<Days moment={this.props.moment} days={newDays} selectedDay={this.props.selectedDay} />
 				</div>
 				<div className="task-list">
-					<TaskList moment={this.props.moment} days={tasks} selectedDay={this.props.selectedDay}/>
+					<TaskList moment={this.props.moment} days={newDays} selectedDay={this.props.selectedDay}/>
 				</div>
 				<div className="task-search">
-					<TaskSearch search={this.props.search} days={tasks}/>
+					<TaskSearch search={this.props.search} days={newDays}/>
 				</div>
 			</div>
 		)

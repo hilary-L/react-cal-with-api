@@ -15,14 +15,10 @@ var TaskSearch = React.createClass({
 			var newDaysList = this.props.days.filter(function(day) {
 
 				var taskList = day.tasks.filter(function(task) {
-					return task.taskName.toLowerCase().match(search);
+					return task.content.toLowerCase().match(search);
 				});
 
-				var occasionsList = day.occasions.filter(function(occasion) {
-					return occasion.occasionName.toLowerCase().match(search);
-				});
-
-				return taskList.length > 0 || occasionsList.length > 0;
+				return taskList.length > 0;
 		
 			});
 

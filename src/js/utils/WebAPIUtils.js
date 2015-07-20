@@ -16,7 +16,6 @@ var WebAPIUtils = {
 							console.log(errorMessages);
 						}
 						else {
-							console.log("Received success response!");
 							var json = JSON.parse(res.text);
 							calendarActions.receiveLogin(json, null);
 						}
@@ -24,7 +23,6 @@ var WebAPIUtils = {
 				});
 	},
 	getEvents: function() {
-		console.log(sessionStorage.getItem('accessToken'));
 		request.get(appConstants.APIEndpoints.EVENTS)
 			.set({ 'Accept': 'application/json', 'Authorization': sessionStorage.getItem('accessToken') })
 			.end(function(error, res) {

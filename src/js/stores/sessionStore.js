@@ -52,8 +52,6 @@ sessionStore.dispatchToken = AppDispatcher.register(function(action){
 				setSession(action.json);
 				sessionStorage.setItem('accessToken', _store.accessToken);
 				sessionStorage.setItem('email', _store.email);
-				console.log('set session!');
-				console.log(_store.accessToken);
 				WebAPIUtils.getEvents();
 			}
 			else if (action.errors) {
