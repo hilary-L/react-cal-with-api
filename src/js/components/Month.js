@@ -24,27 +24,28 @@ var Month = React.createClass({
 				monthName: moment(item).format('MMMM'),
 				num: moment(item).format('D'),
 				holiday: moment(item).holiday(),
-				moment: moment(item).format('MMMM D YYYY')
+				moment: moment(item).format('MMMM D YYYY'),
+				time: moment(item).format('h:mm a')
 				
 				}
 			)
 		});
 
 		var formattedEvents = this.props.events.map(function(item) {
-			var testing = moment(item.date).format('MMMM D YYYY');
 			return(
 				{
 					category: item.category,
 					content: item.content,
 					help: item.help,
-					moment: testing,
+					moment: moment(item.date).format('MMMM D YYYY'),
+					time: moment(item.date).format('h:mm a')
 				}
 			)
 		});
 
 		var newDays = days.map(function(day) {
 
-			var matchedTasks = formattedEvents.filter(function(fe) {
+			var matchedEvents = formattedEvents.filter(function(fe) {
 				return fe.moment == day.moment
 			})
 
@@ -55,11 +56,13 @@ var Month = React.createClass({
 					monthName: day.monthName,
 					num: day.num,
 					holiday: day.holiday,
-					tasks: matchedTasks
+					tasks: matchedEvents
 				}
 			)
 
 		});
+
+		console.log(newDays);
 
 
 		var tasks = days.map(function(day, index) {

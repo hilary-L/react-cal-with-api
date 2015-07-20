@@ -14,7 +14,8 @@ var _store = {
 		moment: moment(),
 		num: moment().month() + 1,
 		name: moment().format('MMMM'),
-		year: moment().year()
+		year: moment().year(),
+		time: moment().format("h:mm a")
 	},
 	selectedDay: {
 		year: null,
