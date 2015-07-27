@@ -74,7 +74,8 @@ var Week = React.createClass({
 						return {
 							dayName: moment(time).format('dddd'),
 							time: moment(time).format('h:mm a'),
-							tasks: tasksAtTime
+							tasks: tasksAtTime,
+							holiday: weekday.holiday
 						}
 					}
 
@@ -83,7 +84,8 @@ var Week = React.createClass({
 						return {
 							dayName: moment(time).format('dddd'),
 							time: moment(time).format('h:mm a'),
-							tasks: []
+							tasks: [],
+							holiday: weekday.holiday
 						}
 
 					}
@@ -93,29 +95,60 @@ var Week = React.createClass({
 
 		});
 
-		var timeStrings = ["7:00 am", "8:00 am", "9:00 am", "10:00 am", "11:00 am", "12:00 pm", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm", "6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm"];
+		var timeStrings = ["All Day", "7:00 am", "8:00 am", "9:00 am", "10:00 am", "11:00 am", "12:00 pm", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm", "6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm"];
 
 		var fWeek = timeStrings.map(function(time) {
 
 			var timeRow = formattedWeek.map(function(day) {
 
-				return day.filter(function(times) {
+				if(time == "All Day") {
+					return [
+						{
+							dayName: day[0].dayName,
+							time: "All Day",
+							tasks: [],
+							holiday: day[0].holiday
+						}
+						]
+				}
+				else {
 
-					return times.time == time
-				});
+					return day.filter(function(times) {
+
+						return times.time == time
+					});
+
+				}
+			
 
 
 			});
 
 			return timeRow;
+
 		});
 
 		var weekJSX = fWeek.map(function(time, index) {
 
+			console.log(time);
+
 			var dayBoxes = time.map(function(day, index) {
+
+				if (day[0].time == "All Day" && day[0].holiday) {
+					var holidays = (
+							<div className="holidays">
+								<h3>{day[0].holiday}</h3>
+							</div>
+
+					)
+				}
+				else {
+					var holidays = '';
+				}
 
 				return (
 						<li key={index}>
+							{holidays}
 							<div className="info">
 								<Occasions occasions={day[0].tasks} />
 								<Tasks tasks={day[0].tasks} />
