@@ -7,25 +7,42 @@ var moment = require('moment');
 var CHANGE_EVENT = 'change';
 
 var _store = {
-	moment: {
-		todayYear: moment().format('YYYY'),
-		todayMonth: moment().format('MMMM'),
-		today: moment().date(),
-		moment: moment(),
-		num: moment().month() + 1,
-		name: moment().format('MMMM'),
+	// today is set when app loads and does not change
+	today: {
+		date: moment(),
 		year: moment().year(),
-		time: moment().format("h:mm a")
+		month: moment().format('MMMM'),
+		// monthIndex is the month number obtained from moment, incremented by 1 to match node-calendar's format
+		monthIndex: moment().month() + 1,
+		weekIndex: moment().week(),
+		dayIndex: moment().date(),
+		time: moment().format('h:mm a')
+
 	},
+	// display is the date information that is currently displayed in the calendar view, and is updated via user interaction
+	// we initially set displayed to match today's date so that calendar can render before API returns data
+	displayed: {
+		date: moment(),
+		year: moment().year(),
+		month: moment().format('MMMM'),
+		monthIndex: moment().month() + 1,
+		weekIndex: moment().week(),
+		dayIndex: moment().date(),
+		time: moment().format('h:mm a')
+	},
+	// selected is the currently selected day displayed on the task list
 	selectedDay: {
-		year: null,
-		month: null,
-		num: null,
-		tasks: []
+		date: moment(),
+		year: moment().year(),
+		month: moment().format('MMMM'),
+		monthIndex: moment().month() + 1,
+		weekIndex: moment().week(),
+		dayIndex: moment().date(),
 	},
 	search: '',
 	events: []
-};
+	
+}
 
 var changeSearch = function(data) {
 	_store.search = data;
@@ -33,52 +50,62 @@ var changeSearch = function(data) {
 
 var selectDay = function(data) {
 	_store.selectedDay = {
+		date: data.date,
 		year: data.year,
-		monthName: data.monthName,
-		num: data.num,
-		tasks: data.tasks,
-	}
+		month: data.month,
+		monthIndex: data.monthIndex,
+		weekIndex: data.weekIndex,
+		dayIndex: data.dayIndex,
 
+	}
 };
 
 var updateMonth = function(update) {
-
-	var newMonth = _store.moment.num + update;
+	var newMonth = _store.displayed.monthIndex + update;
 
 	if(newMonth == 0) {
-		_store.moment.year -= 1;
-		_store.moment.num = 12;
-		_store.moment.moment = moment({
-			y: _store.moment.year,
-			M: _store.moment.num - 1
+		_store.displayed.year -= 1;
+		_store.displayed.monthIndex = 12;
+		_store.displayed.date = moment({
+			y: _store.displayed.year,
+			M: _store.displayed.monthIndex - 1
 		});
-		_store.moment.name = moment(_store.moment.moment).format('MMMM');
-
+		_store.displayed.month = moment(_store.displayed.date).format('MMMM');
 	}
 	else if(newMonth == 13) {
-		_store.moment.year += 1;
-		_store.moment.num = 1;
-		_store.moment.moment = moment({
-			y: _store.moment.year,
-			M: _store.moment.num - 1
+		_store.displayed.year += 1;
+		_store.displayed.monthIndex = 1;
+		_store.displayed.date = moment({
+			y: _store.displayed.year,
+			M: _store.displayed.monthIndex -1
 		});
-		_store.moment.name = moment(_store.moment.moment).format('MMMM');
+		_store.displayed.month = moment(_store.displayed.date).format('MMMM');
 	}
 	else {
-		_store.moment.num += update;
-		_store.moment.moment = moment({
-			y: _store.moment.year,
-			M: _store.moment.num - 1
+		_store.displayed.monthIndex += update;
+		_store.displayed.date = moment({
+			y: _store.displayed.year,
+			M: _store.displayed.monthIndex - 1
 		});
-		_store.moment.name = moment(_store.moment.moment).format('MMMM');
+		_store.displayed.month = moment(_store.displayed.date).format('MMMM');
 	}
-
 };
 
-var updateEvents = function(events) {
-	_store.events = events.events;
-	console.log(_store.events);
-}
+var updateEvents = function(data) {
+	var formattedEvents = data.events.map(function(item) {
+			return(
+				{
+					category: item.category,
+					content: item.content,
+					help: item.help,
+					moment: moment(item.date),
+					time: moment(item.date).format('h:mm a')
+				}
+			)
+		});
+	_store.events = formattedEvents;
+
+};
 
 var calendarStore = objectAssign({}, EventEmitter.prototype, {
 	addChangeListener: function(cb) {
@@ -87,14 +114,17 @@ var calendarStore = objectAssign({}, EventEmitter.prototype, {
 	removeChangeListener: function(cb) {
 		this.removeListener(CHANGE_EVENT, cb);
 	},
-	getMoment: function() {
-		return _store.moment;
+	getToday: function() {
+		return _store.today;
 	},
-	getSearch: function() {
-		return _store.search;
+	getDisplayed: function() {
+		return _store.displayed;
 	},
 	getSelected: function() {
 		return _store.selectedDay;
+	},
+	getSearch: function() {
+		return _store.search;
 	},
 	getEvents: function() {
 		return _store.events;
@@ -125,3 +155,7 @@ calendarStore.dispatchToken = AppDispatcher.register(function(action){
 });
 
 module.exports = calendarStore;
+
+
+
+

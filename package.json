@@ -33,6 +33,7 @@
     "object-assign": "latest",
     "react": "^0.13.3",
     "react-router": "1.0.0-beta3",
-    "superagent": "^0.21.0"
+    "superagent": "^0.21.0",
+    "twix": "^0.6.4"
   }
 }

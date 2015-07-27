@@ -6,6 +6,8 @@ var sessionStore = require('../stores/sessionStore');
 var Cal = require('./Cal');
 var LoginPage = require('./LoginPage');
 var Month = require('./Month');
+var View = require('./View');
+var Week = require('./Week');
 
 
 var CalApp = React.createClass({
@@ -42,7 +44,12 @@ React.render((
 	<Router history={new HashHistory}>
 		<Route path="/" component={CalApp}>
 			<Route path="login" component={LoginPage}/>
-			<Route path="cal" component={Cal}/>
+			<Route path="cal" component={Cal}>
+				<Route path="view" component={View}>
+					<Route path="month" component={Month}/>
+					<Route path="week" component={Week}/>
+				</Route>
+			</Route>
 		</Route>
 	</Router>
 	), document.getElementById('app'));

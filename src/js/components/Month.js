@@ -1,10 +1,7 @@
-var React = require('react');
-var moment = require('moment-holidays');
-var Days = require('./Days');
-var TaskList = require('./TaskList');
-var TaskSearch = require('./TaskSearch');
-var Calendar = require('node-calendar');
+import React from 'react';
+var DaysOfMonth = require('./DaysOfMonth');
 var calendarActions = require('../actions/calendarActions');
+var DisplayHeader = require('./DisplayHeader');
 
 var Month = React.createClass({
 	handleUpdateMonth: function(update) {
@@ -12,63 +9,13 @@ var Month = React.createClass({
 	},
 	render: function() {
 
-		var calendar = new Calendar.Calendar(Calendar.SUNDAY);
-
-		var days = calendar.itermonthdates(this.props.moment.year, this.props.moment.num).map(function(item) {
-			return(
-				{
-				year: moment(item).year(),
-				monthNum: moment(item).month() + 1,
-				monthName: moment(item).format('MMMM'),
-				num: moment(item).format('D'),
-				holiday: moment(item).holiday(),
-				moment: moment(item).format('MMMM D YYYY'),
-				time: moment(item).format('h:mm a')
-				
-				}
-			)
-		});
-
-		var formattedEvents = this.props.events.map(function(item) {
-			return(
-				{
-					category: item.category,
-					content: item.content,
-					help: item.help,
-					moment: moment(item.date).format('MMMM D YYYY'),
-					time: moment(item.date).format('h:mm a')
-				}
-			)
-		});
-
-		var newDays = days.map(function(day) {
-
-			var matchedEvents = formattedEvents.filter(function(fe) {
-				return fe.moment == day.moment
-			})
-
-			return (
-				{
-					year: day.year,
-					monthNum: day.monthNum,
-					monthName: day.monthName,
-					num: day.num,
-					holiday: day.holiday,
-					tasks: matchedEvents
-				}
-			)
-
-		});
-
-		console.log(newDays);
+		var caption = this.props.displayed.month + " " + this.props.displayed.year;
 
 		return (
 			<div>
-				<div className="month">
-					<div className="month-header">
-						<span className="left" onClick={this.handleUpdateMonth.bind(null, -1)}>&#171;</span><h2>{this.props.moment.name} &#183; {this.props.moment.year}</h2><span className="right" onClick={this.handleUpdateMonth.bind(null, 1)}>&#187;</span>
-					</div>
-					<div id="days-header">
+				<div className="month-view">
+					<DisplayHeader caption={caption} updateAction={this.handleUpdateMonth}/>
+					<div className="days-header mdl-layout__header-row mdl-shadow--2dp">
 							<ul>
 								<li>Sunday</li>
 								<li>Monday</li>
@@ -79,13 +26,7 @@ var Month = React.createClass({
 								<li>Saturday</li>
 							</ul>
 					</div>
-					<Days moment={this.props.moment} days={newDays} selectedDay={this.props.selectedDay} />
-				</div>
-				<div className="task-list">
-					<TaskList moment={this.props.moment} days={newDays} selectedDay={this.props.selectedDay}/>
-				</div>
-				<div className="task-search">
-					<TaskSearch search={this.props.search} days={newDays}/>
+					<DaysOfMonth today={this.props.today} displayed={this.props.displayed} days={this.props.month} selectedDay={this.props.selectedDay} />
 				</div>
 			</div>
 		)

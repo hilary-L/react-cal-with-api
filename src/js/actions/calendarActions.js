@@ -11,13 +11,7 @@ var calendarActions = {
 	selectDay: function(index, day) {
 		AppDispatcher.dispatch({
 			actionType: appConstants.ActionTypes.SELECT_DAY,
-			data: {
-				year: day.year,
-				monthName: day.monthName,
-				num: day.num,
-				tasks: day.tasks,
-				occasions: day.occasions
-			}
+			data: day
 		});
 	},
 	updateMonth: function(update) {

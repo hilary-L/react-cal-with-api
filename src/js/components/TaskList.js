@@ -1,16 +1,16 @@
-var React = require('react');
+/*var React = require('react');
 var Tasks = require('./Tasks');
 var Occasions = require('./Occasions');
 var calendarActions = require('../actions/calendarActions');
 
 var TaskList = React.createClass({
 	componentWillMount: function() {
-		calendarActions.selectDay(null, this.props.days[this.props.moment.today])
+		calendarActions.selectDay(null, this.props.today)
 	},
 	render: function() {
 		return (
 				<div className="task-list-header">
-					<h2>List for {this.props.selectedDay.monthName} {this.props.selectedDay.num}</h2>
+					<h2>List for {this.props.selectedDay.month} {this.props.selectedDay.dayIndex}</h2>
 					<div className="occasions">
 						<h2>Occasions</h2>
 						<Occasions occasions={this.props.selectedDay.tasks} />
@@ -27,4 +27,4 @@ var TaskList = React.createClass({
 	}
 })
 
-module.exports = TaskList;
+module.exports = TaskList;*/
