@@ -67,37 +67,6 @@ var changeDisplay = function(data) {
 	console.log(_store.displayed);
 };
 
-var updateMonth = function(update) {
-	var newMonth = _store.displayed.monthIndex + update;
-
-	if(newMonth == 0) {
-		_store.displayed.year -= 1;
-		_store.displayed.monthIndex = 12;
-		_store.displayed.date = moment({
-			y: _store.displayed.year,
-			M: _store.displayed.monthIndex - 1
-		});
-		_store.displayed.month = moment(_store.displayed.date).format('MMMM');
-	}
-	else if(newMonth == 13) {
-		_store.displayed.year += 1;
-		_store.displayed.monthIndex = 1;
-		_store.displayed.date = moment({
-			y: _store.displayed.year,
-			M: _store.displayed.monthIndex -1
-		});
-		_store.displayed.month = moment(_store.displayed.date).format('MMMM');
-	}
-	else {
-		_store.displayed.monthIndex += update;
-		_store.displayed.date = moment({
-			y: _store.displayed.year,
-			M: _store.displayed.monthIndex - 1
-		});
-		_store.displayed.month = moment(_store.displayed.date).format('MMMM');
-	}
-};
-
 var updateEvents = function(data) {
 	var formattedEvents = data.events.map(function(item) {
 			return(
@@ -143,10 +112,6 @@ calendarStore.dispatchToken = AppDispatcher.register(function(action){
 	switch(action.actionType){
 		case appConstants.ActionTypes.CHANGE_SEARCH:
 			changeSearch(action.data);
-			calendarStore.emit(CHANGE_EVENT);
-			break;
-		case appConstants.ActionTypes.UPDATE_MONTH:
-			updateMonth(action.data);
 			calendarStore.emit(CHANGE_EVENT);
 			break;
 		case appConstants.ActionTypes.SELECT_DAY:

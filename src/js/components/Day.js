@@ -8,15 +8,35 @@ require('twix');
 
 var Day = React.createClass({
 
-	handleUpdateDay: function() {
+	handleUpdateDay: function(update) {
+
+		var displayed = this.props.displayed;
+
+		if (update == 1) {
+			var newDate = moment(displayed.date).add(1, 'days');
+		}
+		else {
+			var newDate = moment(displayed.date).subtract(1, 'days');
+		}
+
+		var day = {
+			date: newDate,
+			year: newDate.year(),
+			month: newDate.format('MMMM'),
+			monthIndex: newDate.month() + 1,
+			weekIndex: newDate.week(),
+			dayIndex: newDate.date()
+		};
+
+		calendarActions.changeDisplay(day);
 
 	},
 
 	render: function() {
 
-		var dayToMatch = this.props.selectedDay;
+		var dayToMatch = this.props.displayed;
 
-		console.log(dayToMatch);
+		var caption = dayToMatch.month + " " + dayToMatch.dayIndex + ", " + dayToMatch.year;
 
 		var filteredWeek = this.props.month.filter(function(week) {
 
@@ -26,8 +46,6 @@ var Day = React.createClass({
 			})
 
 		});
-
-		console.log(filteredWeek);
 
 		var matchedDay = filteredWeek[0].filter(function(day) {
 
@@ -45,7 +63,7 @@ var Day = React.createClass({
 				return {
 					time: time,
 					tasks: [],
-					holiday: matchedDay.holiday,
+					holiday: matchedDay[0].holiday,
 					}
 			}
 			else if(matchedDay[0].tasks.length > 0 ) {
@@ -75,10 +93,68 @@ var Day = React.createClass({
 
 		console.log(formattedDay);
 
+		var dayJSX = formattedDay.map(function(hour, index) {
+
+			if(hour.time == "All Day" && formattedDay[0].holiday) {
+
+				var holidays = (
+						<div className="holidays">
+								<h3>{formattedDay[0].holiday}</h3>
+						</div>
+
+				)
+
+
+			}
+			else {
+
+				var holidays = '';
+			}
+
+			if(hour.tasks.length > 0) {
+
+				var tasksJSX = (
+						<li key={index}>
+							{holidays}
+							<div className="info">
+								<Occasions occasions={hour.tasks} />
+								<Tasks tasks={hour.tasks} />
+							</div>
+						</li>
+					)
+			}
+			else {
+
+				var tasksJSX = (
+							<li key={index}>
+								{holidays}
+							</li>
+
+				)
+
+			}
+
+			return (
+
+				<div key={index} className="time-row">
+					<ul>
+						<li className="time">{hour.time}</li>
+						{tasksJSX}
+					</ul>
+				</div>
+			)
+
+
+		});
+
 
 
 		return (
-				<div>
+				<div className="day-view">
+					<DisplayHeader caption={caption} updateAction={this.handleUpdateDay} />
+					<div className="day-display">
+						{dayJSX}
+					</div>
 				</div>
 		)
 

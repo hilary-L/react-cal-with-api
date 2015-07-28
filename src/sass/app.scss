@@ -167,7 +167,7 @@ $mdl-pink: #E91E63;
 
     }
 
-    .week-display {
+    .week-display, .day-display {
 
         margin-top: 0.2rem;
 
@@ -208,6 +208,22 @@ $mdl-pink: #E91E63;
                     padding-right: 0.25rem;
                     background-color: $mdl-light-amber;
                     border-bottom: 1px dotted white;
+                }
+            }
+        }
+    }
+
+    .day-display {
+
+        ul {
+
+            li {
+
+                width: 92%;
+
+                &.time {
+
+                    width: 8%;
                 }
             }
         }

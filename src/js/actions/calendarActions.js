@@ -14,12 +14,6 @@ var calendarActions = {
 			data: day
 		});
 	},
-	updateMonth: function(update) {
-		AppDispatcher.dispatch({
-			actionType: appConstants.ActionTypes.UPDATE_MONTH,
-			data: update
-		});
-	},
 	login: function(credentials) {
 		AppDispatcher.dispatch({
 			actionType: appConstants.ActionTypes.LOGIN_REQUEST,

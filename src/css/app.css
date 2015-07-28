@@ -119,23 +119,23 @@ h1, h2, h3, h4, h5, h6 {
 #app .days-header ul li:last-child {
   border-right: none;
 }
-#app .week-display {
+#app .week-display, #app .day-display {
   margin-top: 0.2rem;
 }
-#app .week-display .time-row {
+#app .week-display .time-row, #app .day-display .time-row {
   border-bottom: 1px dotted #ddd;
 }
-#app .week-display .time-row:last-child {
+#app .week-display .time-row:last-child, #app .day-display .time-row:last-child {
   border-bottom: none;
 }
-#app .week-display ul {
+#app .week-display ul, #app .day-display ul {
   list-style: none;
   padding: 0;
   margin: 0;
   line-height: 1.2;
   margin-bottom: -0.25rem;
 }
-#app .week-display ul li {
+#app .week-display ul li, #app .day-display ul li {
   position: relative;
   display: inline-block;
   height: 4rem;
@@ -145,10 +145,10 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   padding: 0.5rem 0;
 }
-#app .week-display ul li:last-child {
+#app .week-display ul li:last-child, #app .day-display ul li:last-child {
   border-right: none;
 }
-#app .week-display ul li.time {
+#app .week-display ul li.time, #app .day-display ul li.time {
   width: 8%;
   text-align: right;
   vertical-align: top;
@@ -156,6 +156,12 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 0.25rem;
   background-color: #FFECB3;
   border-bottom: 1px dotted white;
+}
+#app .day-display ul li {
+  width: 92%;
+}
+#app .day-display ul li.time {
+  width: 8%;
 }
 #app .task-list {
   border: 1px solid black;
