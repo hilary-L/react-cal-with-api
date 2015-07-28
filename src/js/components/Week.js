@@ -11,13 +11,13 @@ var Week = React.createClass({
 
 	handleUpdateWeek: function(update) {
 
-		var selected = this.props.selectedDay;
+		var displayed = this.props.displayed;
 
 		if (update == 1) {
-			var newDate = moment(selected.date).add(7, 'days');
+			var newDate = moment(displayed.date).add(7, 'days');
 		}
 		else {
-			var newDate = moment(selected.date).subtract(7, 'days');
+			var newDate = moment(displayed.date).subtract(7, 'days');
 		}
 
 		var day = {
@@ -29,144 +29,145 @@ var Week = React.createClass({
 			dayIndex: newDate.date()
 		};
 
-		calendarActions.selectDay(1, day);
+		console.log(day);
+
+		calendarActions.changeDisplay(day);
 	},
 
 	render: function() {
 
-		var dayToMatch = this.props.selectedDay.dayIndex;
+		var dayToMatch = this.props.displayed;
 
 		var displayedWeek = this.props.month.filter(function(week) {
 
 			return week.some(function(day) {
-				return dayToMatch == day.dayIndex;
+				return dayToMatch.dayIndex == day.dayIndex && dayToMatch.monthIndex == day.monthIndex;
 			});
 		});
+
+		console.log(displayedWeek);
 
 		var caption = displayedWeek[0][0].month + ' ' + displayedWeek[0][0].dayIndex + " - " + displayedWeek[0][6].month + " " + displayedWeek[0][6].dayIndex;
 
-		
+		var timeStrings = ["All Day", "7 am", "8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm"];
 
-		var formattedWeek = displayedWeek[0].map(function(weekday) {
+		var weekToDisplay = displayedWeek[0].map(function(day) {
 
-				var startTime = moment(weekday.date).add(7, 'hours');
-
-				var times = [];
-
-				for (var i = 0; i <= 14; i++) {
-					
-					times.push(moment(startTime).add(i, 'hours').format());
-				}
-
-				var result = times.map(function(time) {
-
-
-					if (weekday.tasks.length > 0) {
-
-						var tasksAtTime = weekday.tasks.filter(function(task) {
-
-							return moment(time).twix(moment(time).add(1, 'hours')).contains(task.moment)
-
-							
-
-						});
-
-						return {
-							dayName: moment(time).format('dddd'),
-							time: moment(time).format('h:mm a'),
-							tasks: tasksAtTime,
-							holiday: weekday.holiday
-						}
-					}
-
-					else {
-
-						return {
-							dayName: moment(time).format('dddd'),
-							time: moment(time).format('h:mm a'),
-							tasks: [],
-							holiday: weekday.holiday
-						}
-
-					}
-				});
-
-				return result;
-
-		});
-
-		var timeStrings = ["All Day", "7:00 am", "8:00 am", "9:00 am", "10:00 am", "11:00 am", "12:00 pm", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm", "6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm"];
-
-		var fWeek = timeStrings.map(function(time) {
-
-			var timeRow = formattedWeek.map(function(day) {
+			
+			var formattedDay = timeStrings.map(function(time) {
 
 				if(time == "All Day") {
-					return [
-						{
-							dayName: day[0].dayName,
-							time: "All Day",
-							tasks: [],
-							holiday: day[0].holiday
-						}
-						]
+
+					return {
+
+						time: time,
+						tasks: [],
+						holiday: day.holiday
+					}
+				}
+				else if(day.tasks.length > 0) {
+
+					var tasksAtTime = day.tasks.filter(function(task) {
+
+						return task.hour == time
+					});
+
+					return {
+
+						time: time,
+						tasks: tasksAtTime
+					}
+
 				}
 				else {
 
-					return day.filter(function(times) {
+					return {
 
-						return times.time == time
-					});
-
+						time: time,
+						tasks: []
+					}
 				}
-			
-
 
 			});
 
-			return timeRow;
+			return {
+				dayName: moment(day.date).format('dddd'),
+				taskList: formattedDay
+			}
 
 		});
 
-		var weekJSX = fWeek.map(function(time, index) {
 
-			console.log(time);
+		var weekJSX = timeStrings.map(function(time, index) {
 
-			var dayBoxes = time.map(function(day, index) {
+			var timeRow = weekToDisplay.map(function(day) {
 
-				if (day[0].time == "All Day" && day[0].holiday) {
-					var holidays = (
-							<div className="holidays">
-								<h3>{day[0].holiday}</h3>
-							</div>
+				var hoursTasks = day.taskList.filter(function(task) {
 
-					)
+					return task.time == time
+				});
+
+
+				if(hoursTasks[0].tasks.length > 0) {
+
+					return {
+						time: time,
+						dayName: day.dayName,
+						tasks: hoursTasks[0].tasks,
+						holiday: day.taskList[0].holiday
+					}
+
 				}
 				else {
-					var holidays = '';
+
+					return {
+						time: time,
+						dayName: day.dayName,
+						tasks: [],
+						holiday: day.taskList[0].holiday
+					}
 				}
 
-				return (
+			
+			});
+
+			var jsx = timeRow.map(function(day, index) {
+
+					if(day.time == "All Day" && day.holiday) {
+
+						var holidays = (
+							<div className="holidays">
+								<h3>{day.holiday}</h3>
+							</div>
+						)
+					}
+					else {
+						var holidays = '';
+					}
+
+					return (
 						<li key={index}>
 							{holidays}
 							<div className="info">
-								<Occasions occasions={day[0].tasks} />
-								<Tasks tasks={day[0].tasks} />
+								<Occasions occasions={day.tasks} />
+								<Tasks tasks={day.tasks} />
 							</div>
 						</li>
 
 					)
+
 			});
 
 			return (
-				<div key={index} className="time-row">
-					<ul>
-						<li className="time">{time[0][0].time}</li>
-						{dayBoxes}
-					</ul>
-				</div>
-
+					<div key={index} className="time-row">
+						<ul>
+							<li className="time">{timeRow[0].time}</li>
+							{jsx}
+						</ul>
+					</div>
 			)
+
+
 
 		});
 

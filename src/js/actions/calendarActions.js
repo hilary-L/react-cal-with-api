@@ -40,6 +40,12 @@ var calendarActions = {
 			json: json,
 			errors: errors
 		})
+	},
+	changeDisplay: function(day) {
+		AppDispatcher.dispatch({
+			actionType: appConstants.ActionTypes.CHANGE_DISPLAY,
+			data: day
+		});
 	}
 };
 

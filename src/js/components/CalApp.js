@@ -8,6 +8,7 @@ var LoginPage = require('./LoginPage');
 var Month = require('./Month');
 var View = require('./View');
 var Week = require('./Week');
+var Day = require('./Day');
 
 
 var CalApp = React.createClass({
@@ -48,6 +49,7 @@ React.render((
 				<Route path="view" component={View}>
 					<Route path="month" component={Month}/>
 					<Route path="week" component={Week}/>
+					<Route path="day" component={Day}/>
 				</Route>
 			</Route>
 		</Route>

@@ -2,10 +2,31 @@ import React from 'react';
 var DaysOfMonth = require('./DaysOfMonth');
 var calendarActions = require('../actions/calendarActions');
 var DisplayHeader = require('./DisplayHeader');
+var moment = require('moment');
 
 var Month = React.createClass({
 	handleUpdateMonth: function(update) {
-		calendarActions.updateMonth(update);
+
+		var displayed = this.props.displayed;
+
+		if (update == 1) {
+			var newDate = moment(displayed.date).add(1, 'month');
+		}
+		else {
+			var newDate = moment(displayed.date).subtract(1, 'month');
+		}
+
+		var day = {
+			date: newDate,
+			year: newDate.year(),
+			month: newDate.format('MMMM'),
+			monthIndex: newDate.month() + 1,
+			weekIndex: newDate.week(),
+			dayIndex: newDate.date()
+		};
+
+
+		calendarActions.changeDisplay(day);
 	},
 	render: function() {
 

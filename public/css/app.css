@@ -277,6 +277,9 @@ h1, h2, h3, h4, h5, h6 {
   top: 0.5rem;
   right: 0.5rem;
 }
+#app .day .holidays {
+  top: 3rem;
+}
 #app .login-form-box {
   width: 30%;
   margin: 15% auto 0;

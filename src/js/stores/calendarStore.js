@@ -60,6 +60,13 @@ var selectDay = function(data) {
 	}
 };
 
+var changeDisplay = function(data) {
+
+	_store.displayed = data;
+	console.log("New store update!")
+	console.log(_store.displayed);
+};
+
 var updateMonth = function(update) {
 	var newMonth = _store.displayed.monthIndex + update;
 
@@ -99,7 +106,8 @@ var updateEvents = function(data) {
 					content: item.content,
 					help: item.help,
 					moment: moment(item.date),
-					time: moment(item.date).format('h:mm a')
+					time: moment(item.date).format('h:mm a'),
+					hour: moment(item.date).format('h a')
 				}
 			)
 		});
@@ -147,6 +155,10 @@ calendarStore.dispatchToken = AppDispatcher.register(function(action){
 			break;
 		case appConstants.ActionTypes.RECEIVE_EVENTS:
 			updateEvents(action.json);
+			calendarStore.emit(CHANGE_EVENT);
+			break;
+		case appConstants.ActionTypes.CHANGE_DISPLAY:
+			changeDisplay(action.data);
 			calendarStore.emit(CHANGE_EVENT);
 			break;
 		default:
