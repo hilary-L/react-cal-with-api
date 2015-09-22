@@ -65,7 +65,7 @@ $task-scheduled: #70C3FC;
             text-align: left;
             font-size: 0.6rem;
             color: black;
-            font-family: "Proxima Nova Semibold";
+            font-family: "Muli";
 
                 &.occasion {
                     border-left: 5px solid $occasion;
@@ -115,7 +115,7 @@ $task-scheduled: #70C3FC;
                 text-align: left;
                 font-size: 0.6rem;
                 color: black;
-                font-family: "Proxima Nova Semibold";
+                font-family: "Muli";
                 padding: 0.25rem 0 0.25rem 0.5rem;
                 border-left: 5px solid $mdl-teal;
                 background: repeating-linear-gradient(
@@ -132,7 +132,7 @@ $task-scheduled: #70C3FC;
     h2 {
     	font-size: 1.2rem;
     	color: #545454;
-        font-family: "Proxima Nova Semibold";
+        font-family: "Muli";
     }
 
     .view {
@@ -270,7 +270,7 @@ $task-scheduled: #70C3FC;
         h4 {
             display: block;
             margin: 1rem auto;
-            font-family: "Proxima Nova Regular";
+            font-family: "Muli";
             color: #777;
         }
 
@@ -586,7 +586,7 @@ $task-scheduled: #70C3FC;
             color: #F08045;
             font-style: normal;
             font-size: 0.875rem;
-            font-family: "Proxima Nova Regular";
+            font-family: "Muli";
             letter-spacing: 1px;
         }
 
@@ -611,7 +611,7 @@ $task-scheduled: #70C3FC;
 
             h5, h4 {
                 color: #525252;
-                font-family: "Proxima Nova Semibold";
+                font-family: "Muli 400";
                 margin-top: 1rem;
                 margin-bottom: 1rem;
              
@@ -751,7 +751,7 @@ $task-scheduled: #70C3FC;
             padding: 0.5rem;
             margin-bottom: 0.5rem;
             color: black;
-            font-family: "Proxima Nova Semibold";
+            font-family: "Muli";
             border-radius: 2px;
 
             span {
@@ -823,7 +823,7 @@ $task-scheduled: #70C3FC;
             li {
                 font-size: 0.875rem;
                 color: #7780BF;
-                font-family: "Proxima Nova Semibold";
+                font-family: "Muli";
                 margin-bottom: 1rem;
                 line-height: 1;
 
