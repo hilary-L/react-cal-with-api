@@ -1,4 +1,4 @@
-var APIRoot = "http://sheltered-shelf-4779.herokuapp.com";
+var APIRoot = "https://sheltered-shelf-4779.herokuapp.com";
 
 var appConstants = {
 
