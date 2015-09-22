@@ -66,6 +66,7 @@ $task-scheduled: #70C3FC;
             font-size: 0.6rem;
             color: black;
             font-family: "Muli";
+            font-weight: 400;
 
                 &.occasion {
                     border-left: 5px solid $occasion;
@@ -116,6 +117,7 @@ $task-scheduled: #70C3FC;
                 font-size: 0.6rem;
                 color: black;
                 font-family: "Muli";
+                font-weight: 400;
                 padding: 0.25rem 0 0.25rem 0.5rem;
                 border-left: 5px solid $mdl-teal;
                 background: repeating-linear-gradient(
@@ -271,6 +273,7 @@ $task-scheduled: #70C3FC;
             display: block;
             margin: 1rem auto;
             font-family: "Muli";
+            font-weight: 400;
             color: #777;
         }
 
@@ -531,6 +534,7 @@ $task-scheduled: #70C3FC;
             color: white;
             background-color: #00B9FF;
             font-family: Muli;
+            font-weight: 400;
             text-align: center;
             margin-top: 0;
         }
@@ -547,6 +551,7 @@ $task-scheduled: #70C3FC;
             border-radius: 4px;
             color: #00B9FF;
             font-family: Muli;
+            font-weight: 400;
             display: block;
             margin: 0 auto;
             padding: 0.5rem 1.5rem;
@@ -587,6 +592,7 @@ $task-scheduled: #70C3FC;
             font-style: normal;
             font-size: 0.875rem;
             font-family: "Muli";
+            font-weight: 400;
             letter-spacing: 1px;
         }
 
@@ -611,9 +617,11 @@ $task-scheduled: #70C3FC;
 
             h5, h4 {
                 color: #525252;
-                font-family: "Muli 400";
+                font-family: "Muli";
+                font-weight: 400;
                 margin-top: 1rem;
                 margin-bottom: 1rem;
+                font-weight: 400;
              
 
                 &.false {
@@ -752,6 +760,7 @@ $task-scheduled: #70C3FC;
             margin-bottom: 0.5rem;
             color: black;
             font-family: "Muli";
+            font-weight: 400;
             border-radius: 2px;
 
             span {
@@ -824,6 +833,7 @@ $task-scheduled: #70C3FC;
                 font-size: 0.875rem;
                 color: #7780BF;
                 font-family: "Muli";
+                font-weight: 400;
                 margin-bottom: 1rem;
                 line-height: 1;
 
