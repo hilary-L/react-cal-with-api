@@ -3,7 +3,8 @@ var moment = require('moment-holidays');
 var calendarStore = require('../stores/calendarStore');
 var calendarActions = require('../actions/calendarActions');
 var Calendar = require('node-calendar');
-var TaskSearch = require('./TaskSearch');
+var Sidebar = require('./Sidebar');
+var TaskCard = require('./TaskCard');
 var View = require('./View');
 
 var Cal = React.createClass({
@@ -13,7 +14,9 @@ var Cal = React.createClass({
 			displayed: calendarStore.getDisplayed(),
 			selectedDay: calendarStore.getSelected(),
 			search: calendarStore.getSearch(),
-			events: calendarStore.getEvents()
+			events: calendarStore.getEvents(),
+			buttonState: calendarStore.getButton(),
+			filter: calendarStore.getFilter()
 		})
 	},
 	componentDidMount: function() {
@@ -28,11 +31,15 @@ var Cal = React.createClass({
 			displayed: calendarStore.getDisplayed(),
 			selectedDay: calendarStore.getSelected(),
 			search: calendarStore.getSearch(),
-			events: calendarStore.getEvents()
+			events: calendarStore.getEvents(),
+			buttonState: calendarStore.getButton(),
+			filter: calendarStore.getFilter()
 		});
 	},
 	render: function() {
 		var calendar = new Calendar.Calendar(Calendar.SUNDAY);
+
+		// Create the array for the months, and format events to match the currently displayed month
 
 		var calArray = calendar.monthdatescalendar(this.state.displayed.year, this.state.displayed.monthIndex);
 
@@ -88,17 +95,17 @@ var Cal = React.createClass({
 
 		});
 
-
-		var view = React.cloneElement(this.props.children, {today: this.state.today, displayed: this.state.displayed, selectedDay: this.state.selectedDay, search: this.state.search, month: newDays});
-
+		var view = React.cloneElement(this.props.children, {today: this.state.today, displayed: this.state.displayed, selectedDay: this.state.selectedDay, search: this.state.search, month: newDays, buttonState: this.state.buttonState, events: this.state.events, filter: this.state.filter});
+		
 		return (
 			<div className="container">
-				<div className="row">
-					<div className="view">
+				<div className="mdl-grid">
+					<div className="view mdl-cell mdl-cell--9-col mdl-cell--8-col-tablet mdl-cell--12-col-phone">
 						{view}
 					</div>
-					<div className="task-search">
-						<TaskSearch search={this.state.search} days={newDays}/>
+					<div className="sidebar mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+						<TaskCard today={this.state.today} selectedDay={this.state.selectedDay} events={newDays} />
+						<Sidebar displayed={this.state.displayed} search={this.state.search} events={this.state.events} filter={this.state.filter} />
 					</div>
 				</div>
 			</div>

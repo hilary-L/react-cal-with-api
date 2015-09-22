@@ -2,13 +2,20 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var appConstants = require('../constants/appConstants');
 
 var calendarActions = {
+	changeFilter: function(filter) {
+		AppDispatcher.dispatch({
+			actionType: appConstants.ActionTypes.CHANGE_FILTER,
+			data: filter
+		});
+
+	},
 	changeSearch: function(search) {
 		AppDispatcher.dispatch({
 			actionType: appConstants.ActionTypes.CHANGE_SEARCH,
 			data: search
 		});
 	},
-	selectDay: function(index, day) {
+	selectDay: function(day) {
 		AppDispatcher.dispatch({
 			actionType: appConstants.ActionTypes.SELECT_DAY,
 			data: day
@@ -39,6 +46,12 @@ var calendarActions = {
 		AppDispatcher.dispatch({
 			actionType: appConstants.ActionTypes.CHANGE_DISPLAY,
 			data: day
+		});
+	},
+	changeButton: function(selection) {
+		AppDispatcher.dispatch({
+			actionType: appConstants.ActionTypes.CHANGE_BUTTON,
+			data: selection
 		});
 	}
 };

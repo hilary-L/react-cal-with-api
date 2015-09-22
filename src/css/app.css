@@ -1,19 +1,23 @@
-html {
+#app {
   box-sizing: border-box;
   font-size: 16px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Muli";
-  line-height: 1;
-}
-
-#app {
   width: 100%;
   height: auto;
   box-sizing: border-box;
   font-family: "Muli", sans-serif;
   padding: 1.5rem;
+  /* Sidebar (search, date range, task card) */
+    /*.mdl-cell--3-col {
+
+        .mdl-card {
+            width: 100%;
+        }
+    }*/
+  /* Task Card */
+}
+#app h1, #app h2, #app h3, #app h4, #app h5, #app h6 {
+  font-family: "Muli";
+  line-height: 1;
 }
 #app .info {
   position: absolute;
@@ -33,17 +37,20 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0.1rem 0;
   text-align: left;
   font-size: 0.6rem;
-  background-color: #E0DFE1;
-  color: #919092;
+  color: black;
+  font-family: "Proxima Nova Semibold";
 }
 #app .info > div h3.occasion {
-  border-left: 5px solid #FFC107;
+  border-left: 5px solid #FFC926;
+  background: repeating-linear-gradient(-45deg, #FFEFAC, #FFEFAC 2px, white 2px, white 3px);
 }
 #app .info > div h3.task {
-  border-left: 5px solid #2196F3;
+  border-left: 5px solid #8479FF;
+  background: repeating-linear-gradient(-45deg, #E4E6F2, #E4E6F2 2px, white 2px, white 3px);
 }
 #app .info > div h3.task.help {
-  border-left: 5px solid #E91E63;
+  border-left: 5px solid #FF5400;
+  background: repeating-linear-gradient(-45deg, #FFDFDE, #FFDFDE 2px, white 2px, white 3px);
 }
 #app .holidays {
   position: absolute;
@@ -54,42 +61,84 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0.1rem 0;
   text-align: left;
   font-size: 0.6rem;
-  background-color: #E0DFE1;
-  color: #919092;
+  color: black;
+  font-family: "Proxima Nova Semibold";
   padding: 0.25rem 0 0.25rem 0.5rem;
   border-left: 5px solid #1DE9B6;
+  background: repeating-linear-gradient(-45deg, #CCEDE5, #CCEDE5 2px, white 2px, white 3px);
 }
 #app h2 {
   font-size: 1.2rem;
-  color: white;
+  color: #545454;
+  font-family: "Proxima Nova Semibold";
 }
 #app .view {
-  width: 75%;
-  margin-right: 1%;
-  float: left;
   margin-bottom: 2rem;
 }
 #app .view .mdl-card {
   width: 100%;
 }
-#app .display-header {
-  background-color: #64B5F6;
+#app .cal-top {
+  box-shadow: none;
+  background-color: #eee;
+  border-top: 1px solid #c4c4c4;
+  border-bottom: 1px solid #c4c4c4;
+}
+#app .cal-top button {
+  margin-top: 1.25rem;
+}
+#app .cal-top button.lt-p-btn-md {
+  margin-top: 1rem;
+}
+#app .cal-top button.lt-sub-btn-md {
+  border-radius: 0;
+  border-right: 0px;
+}
+#app .cal-top button.lt-sub-btn-md:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+#app .cal-top button.lt-sub-btn-md:nth-child(4) {
+  border-right: 1px solid #AAA;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+#app .cal-top button.lt-sub-btn-md.active {
+  background-image: linear-gradient(#555, #555);
   color: white;
-  max-height: 50px;
-  padding: 0.5rem;
+}
+#app .cal-top h6 {
+  color: #8A90F2;
+  text-decoration: underline;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+#app .cal-top .lt-sub-btn-md:hover {
+  background-image: linear-gradient(#555, #555);
+}
+#app .cal-top .mdl-layout__header-row {
+  padding-left: 2rem;
+}
+#app .display-header {
+  background-color: white;
+  color: #545454;
+  max-height: 80px;
+  padding: 1.5rem 0.5rem;
 }
 #app .display-header .left {
   float: left;
-}
-#app .display-header .right {
-  float: right;
+  margin: 2rem 0;
+  color: #ccc;
 }
 #app .display-header h2 {
-  display: block;
-  margin: 0 auto;
+  float: left;
+  margin: 2.5rem 2rem;
 }
 #app .days-header {
-  background-color: #BBDEFB;
+  background-color: #eee;
+  border-top: 1px solid #c4c4c4;
+  border-bottom: 1px solid #c4c4c4;
   padding: 0;
   max-height: 40px;
 }
@@ -111,7 +160,6 @@ h1, h2, h3, h4, h5, h6 {
   width: 14.28%;
   height: auto;
   text-align: center;
-  border-right: 1px dotted #777;
   box-sizing: border-box;
   font-size: 14px;
   color: #777;
@@ -119,8 +167,11 @@ h1, h2, h3, h4, h5, h6 {
 #app .days-header ul li:last-child {
   border-right: none;
 }
-#app .week-display, #app .day-display {
-  margin-top: 0.2rem;
+#app .days-header h4 {
+  display: block;
+  margin: 1rem auto;
+  font-family: "Proxima Nova Regular";
+  color: #777;
 }
 #app .week-display .time-row, #app .day-display .time-row {
   border-bottom: 1px dotted #ddd;
@@ -154,7 +205,7 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: top;
   font-size: 0.75rem;
   padding-right: 0.25rem;
-  background-color: #FFECB3;
+  background-color: #eee;
   border-bottom: 1px dotted white;
 }
 #app .day-display ul li {
@@ -246,6 +297,9 @@ h1, h2, h3, h4, h5, h6 {
 #app .week {
   border-bottom: 1px dotted #ddd;
 }
+#app .week.days-header {
+  border-bottom: 1px solid #c4c4c4;
+}
 #app .week:last-child {
   border-bottom: none;
 }
@@ -269,13 +323,16 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #448AFF;
   color: white;
 }
+#app .day.other-month {
+  background-color: #FAFAFA;
+}
 #app .day span.num {
   display: inline-block;
   width: 1.6rem;
   height: 1.3rem;
   padding-top: 0.3rem;
   text-align: center;
-  color: #919092;
+  color: #7C7C7D;
   background-color: #F4F4F4;
   border-radius: 50%;
   font-size: 0.75rem;
@@ -317,4 +374,261 @@ h1, h2, h3, h4, h5, h6 {
 }
 #app .login-form-box p {
   text-align: center;
+}
+#app .sidebar {
+  margin-bottom: 2rem;
+  min-height: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+#app .sidebar .hidden {
+  display: none;
+}
+#app .sidebar small.error {
+  background-color: transparent;
+  color: #F08045;
+  font-style: normal;
+  font-size: 0.875rem;
+  font-family: "Proxima Nova Regular";
+  letter-spacing: 1px;
+}
+#app .sidebar .sidebar-bottom {
+  width: 100%;
+  margin-top: 1rem;
+  flex-grow: 2;
+  background-color: #eee;
+  padding: 1rem;
+}
+#app .sidebar .sidebar-bottom input {
+  border-radius: 2px;
+}
+#app .sidebar .sidebar-bottom h5 {
+  margin-left: 1rem;
+}
+#app .sidebar .sidebar-bottom h5, #app .sidebar .sidebar-bottom h4 {
+  color: #525252;
+  font-family: "Proxima Nova Semibold";
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+#app .sidebar .sidebar-bottom h5.false, #app .sidebar .sidebar-bottom h4.false {
+  display: none;
+}
+#app .sidebar .sidebar-bottom ul {
+  list-style: none;
+  padding: 0 1rem 0.5rem 1rem;
+  color: #525252;
+  font-size: 0.875rem;
+}
+#app .sidebar .sidebar-bottom ul li {
+  text-decoration: underline;
+  color: #767Ec2;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+#app .sidebar .sidebar-bottom ul li.false {
+  display: none;
+}
+#app .sidebar .sidebar-bottom ul li.true {
+  display: list-item;
+}
+#app .sidebar .sidebar-bottom h6 {
+  display: inline;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  border-bottom: 1px dotted #aaa;
+}
+#app .sidebar .date-box {
+  margin: 0rem 0rem 1.5rem 0;
+  border-bottom: 1px solid white;
+}
+#app .sidebar .date-box input {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+#app .sidebar .date-box span {
+  margin: 0 0.25rem;
+  color: #525252;
+}
+#app .sidebar .date-box button {
+  margin-left: 0.5rem;
+}
+#app .test-box {
+  position: relative;
+  margin: 0rem 0rem 0.5rem 0;
+  z-index: 1000;
+  border-bottom: 1px solid white;
+}
+#app .test-box input {
+  display: inline-block;
+  width: 34%;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem;
+}
+#app .test-box span {
+  color: #525252;
+  margin: 0 0.25rem;
+}
+#app .test-box button {
+  margin-left: 0.5rem;
+}
+#app .test-box:after {
+  position: absolute;
+  display: block;
+  content: "";
+  border-bottom: 1px solid #ABABAB;
+  height: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  bottom: 0;
+  left: 0;
+}
+#app .filter-box {
+  position: relative;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid white;
+}
+#app .filter-box:after {
+  position: absolute;
+  display: block;
+  content: "";
+  border-bottom: 1px solid #ABABAB;
+  height: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  bottom: 0;
+  left: 0;
+}
+#app .filter-box input[type="checkbox"] {
+  position: relative;
+  clip: none;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  margin-right: 0.5rem;
+}
+#app .filter-box .filter {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: black;
+  font-family: "Proxima Nova Semibold";
+  border-radius: 2px;
+}
+#app .filter-box .filter span {
+  font-size: 0.875rem;
+}
+#app .filter-box .filter.help {
+  border-left: 5px solid #FF5400;
+  background: repeating-linear-gradient(-45deg, #FFDFDE, #FFDFDE 2px, white 2px, white 3px);
+}
+#app .filter-box .filter.needs-met {
+  border-left: 5px solid #8479FF;
+  background: repeating-linear-gradient(-45deg, #DDDAF7, #DDDAF7 2px, white 2px, white 3px);
+}
+#app .filter-box .filter.occasions {
+  border-left: 5px solid #FFC926;
+  background: repeating-linear-gradient(-45deg, #FFEFAC, #FFEFAC 2px, white 2px, white 3px);
+  margin-bottom: 1rem;
+}
+#app .task-card {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+#app .task-card .mdl-card__title {
+  background-image: url("../images/geo3.png");
+  min-height: 150px;
+}
+#app .task-card .mdl-card__title h2 {
+  color: white;
+}
+#app .task-card .mdl-card__supporting-text {
+  width: 100%;
+}
+#app .task-card ul {
+  list-style: none;
+  margin-left: 0;
+}
+#app .task-card ul li {
+  font-size: 0.875rem;
+  color: #7780BF;
+  font-family: "Proxima Nova Semibold";
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+#app .task-card ul li span.time {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-top: -0.2rem;
+  padding: 0.5rem 0.75rem;
+  color: white;
+  float: left;
+}
+#app .task-card ul li.occasion span.time {
+  background-color: #FFC926;
+}
+#app .task-card ul li.task span.time {
+  background-color: #8479FF;
+}
+#app .task-card ul li.task.true span.time {
+  background-color: #FF5400;
+}
+#app .year-view {
+  border-top: 1px solid #c4c4c4;
+  padding: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+#app .year-view .year-month {
+  margin: 1rem 0.75rem;
+  border: 1px solid #eee;
+  padding: 0.5rem 0;
+}
+#app .year-view .year-month h4 {
+  text-align: center;
+  color: #777;
+}
+#app .year-view .year-month ul {
+  display: flex;
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: 0.25rem;
+  align-items: center;
+  justify-content: space-between;
+}
+#app .year-view .year-month ul li {
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  min-width: 11%;
+  font-size: 0.75rem;
+  color: #777;
+  margin: 0.25rem;
+  cursor: pointer;
+}
+#app .year-view .year-month ul li.task {
+  color: white;
+  background-color: #8479FF;
+  border-radius: 4px;
+}
+#app .year-view .year-month ul li.occasion {
+  color: white;
+  background-color: #FFC926;
+  border-radius: 4px;
+}
+#app .year-view .year-month ul li.help {
+  color: white;
+  background-color: #FF5400;
+  border-radius: 4px;
+}
+#app .year-view .year-month ul li.other-month {
+  color: white;
+  background-color: white;
+  border-radius: 4px;
+}
+#app .year-view .year-month ul li.filtered {
+  background-color: white;
+  color: #777;
+}
+#app .year-view .year-month ul.day-header {
+  background-color: #eee;
+  border-bottom: 1px solid #c4c4c4;
+  border-top: 1px solid #c4c4c4;
 }

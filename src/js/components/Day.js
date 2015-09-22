@@ -29,10 +29,15 @@ var Day = React.createClass({
 		};
 
 		calendarActions.changeDisplay(day);
+		calendarActions.selectDay(day);
 
 	},
 
 	render: function() {
+
+		var dayOfWeek = moment(this.props.displayed.date).format('dddd');
+	
+		var self = this;
 
 		var dayToMatch = this.props.displayed;
 
@@ -52,7 +57,6 @@ var Day = React.createClass({
 			return day.dayIndex == dayToMatch.dayIndex
 		});
 
-		console.log(matchedDay);
 
 		var timeStrings = ["All Day", "7 am", "8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm"];
 
@@ -91,8 +95,6 @@ var Day = React.createClass({
 			}
 		});
 
-		console.log(formattedDay);
-
 		var dayJSX = formattedDay.map(function(hour, index) {
 
 			if(hour.time == "All Day" && formattedDay[0].holiday) {
@@ -117,8 +119,8 @@ var Day = React.createClass({
 						<li key={index}>
 							{holidays}
 							<div className="info">
-								<Occasions occasions={hour.tasks} />
-								<Tasks tasks={hour.tasks} />
+								<Occasions occasions={hour.tasks} filter={self.props.filter} />
+								<Tasks tasks={hour.tasks} filter={self.props.filter} />
 							</div>
 						</li>
 					)
@@ -152,6 +154,9 @@ var Day = React.createClass({
 		return (
 				<div className="day-view">
 					<DisplayHeader caption={caption} updateAction={this.handleUpdateDay} />
+					<div className="days-header mdl-layout__header-row mdl-shadow--1dp">
+							<h4>{dayOfWeek}</h4>
+					</div>
 					<div className="day-display">
 						{dayJSX}
 					</div>

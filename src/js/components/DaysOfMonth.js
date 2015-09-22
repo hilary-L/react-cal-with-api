@@ -3,8 +3,8 @@ var Tasks = require('./Tasks');
 var calendarActions = require('../actions/calendarActions');
 
 var DaysOfMonth = React.createClass({
-	handleSelectDay: function(index, day) {
-		calendarActions.selectDay(index, day);
+	handleSelectDay: function(day) {
+		calendarActions.selectDay(day);
 	},
 	render: function() {
 		var self = this;
@@ -32,12 +32,22 @@ var DaysOfMonth = React.createClass({
 						)
 				}
 
-				return (<div key={index} className={classes} onClick={self.handleSelectDay.bind(null, index, day)}>
+				if(day.month != self.props.displayed.month) {
+					classes += ' other-month';
+				}
+
+				var sortedTasks = day.tasks.sort(function(a, b) {
+					return (a.moment.isBefore(b.moment) ? -1 : 1)
+				});
+
+
+
+				return (<div key={index} className={classes} onClick={self.handleSelectDay.bind(null, day)}>
 							<span className="num">{day.dayIndex}</span>
 							{holidays}
 							<div className="info">
-								<Occasions occasions={day.tasks}/>
-								<Tasks tasks={day.tasks}/>
+								<Occasions occasions={sortedTasks} filter={self.props.filter}/>
+								<Tasks tasks={sortedTasks} filter={self.props.filter}/>
 							</div>
 						</div>
 					)

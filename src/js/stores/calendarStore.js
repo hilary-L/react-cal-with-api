@@ -30,7 +30,7 @@ var _store = {
 		dayIndex: moment().date(),
 		time: moment().format('h:mm a')
 	},
-	// selected is the currently selected day displayed on the task list
+	// selected is the current user selected day. On initial state it is set to today. Selected day is the day displayed in the task card.
 	selectedDay: {
 		date: moment(),
 		year: moment().year(),
@@ -40,31 +40,41 @@ var _store = {
 		dayIndex: moment().date(),
 	},
 	search: '',
-	events: []
+	events: [],
+	// Button bar is the navigation bar on the top of the calendar. Each property controls whether a specific button has an "active" style applied.
+	buttonBar: {
+		dayActive: false,
+		weekActive: false,
+		monthActive: true,
+		yearActive: false
+	},
+	filter: {
+		helpShown: true,
+		needsMetShown: true,
+		occasionsShown: true
+	}
 	
+}
+
+var changeButton = function(data) {
+	_store.buttonBar = data;
 }
 
 var changeSearch = function(data) {
 	_store.search = data;
 };
 
-var selectDay = function(data) {
-	_store.selectedDay = {
-		date: data.date,
-		year: data.year,
-		month: data.month,
-		monthIndex: data.monthIndex,
-		weekIndex: data.weekIndex,
-		dayIndex: data.dayIndex,
+var changeFilter = function(data) {
+	_store.filter = data;
+};
 
-	}
+var selectDay = function(data) {
+	_store.selectedDay = data;
 };
 
 var changeDisplay = function(data) {
 
 	_store.displayed = data;
-	console.log("New store update!")
-	console.log(_store.displayed);
 };
 
 var updateEvents = function(data) {
@@ -105,11 +115,21 @@ var calendarStore = objectAssign({}, EventEmitter.prototype, {
 	},
 	getEvents: function() {
 		return _store.events;
+	},
+	getButton: function() {
+		return _store.buttonBar;
+	},
+	getFilter: function() {
+		return _store.filter;
 	}
 });
 
 calendarStore.dispatchToken = AppDispatcher.register(function(action){
 	switch(action.actionType){
+		case appConstants.ActionTypes.CHANGE_BUTTON:
+			changeButton(action.data);
+			calendarStore.emit(CHANGE_EVENT);
+			break;
 		case appConstants.ActionTypes.CHANGE_SEARCH:
 			changeSearch(action.data);
 			calendarStore.emit(CHANGE_EVENT);
@@ -126,6 +146,9 @@ calendarStore.dispatchToken = AppDispatcher.register(function(action){
 			changeDisplay(action.data);
 			calendarStore.emit(CHANGE_EVENT);
 			break;
+		case appConstants.ActionTypes.CHANGE_FILTER:
+			changeFilter(action.data);
+			calendarStore.emit(CHANGE_EVENT);
 		default:
 			return true;
 	}

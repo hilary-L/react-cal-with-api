@@ -36,7 +36,7 @@ var Month = React.createClass({
 			<div>
 				<div className="month-view">
 					<DisplayHeader caption={caption} updateAction={this.handleUpdateMonth}/>
-					<div className="days-header mdl-layout__header-row mdl-shadow--2dp">
+					<div className="days-header mdl-layout__header-row mdl-shadow--1dp">
 							<ul>
 								<li>Sunday</li>
 								<li>Monday</li>
@@ -47,7 +47,7 @@ var Month = React.createClass({
 								<li>Saturday</li>
 							</ul>
 					</div>
-					<DaysOfMonth today={this.props.today} displayed={this.props.displayed} days={this.props.month} selectedDay={this.props.selectedDay} />
+					<DaysOfMonth today={this.props.today} displayed={this.props.displayed} days={this.props.month} selectedDay={this.props.selectedDay} filter={this.props.filter} />
 				</div>
 			</div>
 		)

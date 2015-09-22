@@ -9,6 +9,11 @@ require('twix');
 
 var Week = React.createClass({
 
+	handleSelectDay: function(day) {
+		var selectedDay = day.moment._i;
+		calendarActions.selectDay(selectedDay);
+	},
+
 	handleUpdateWeek: function(update) {
 
 		var displayed = this.props.displayed;
@@ -29,12 +34,13 @@ var Week = React.createClass({
 			dayIndex: newDate.date()
 		};
 
-		console.log(day);
 
 		calendarActions.changeDisplay(day);
 	},
 
 	render: function() {
+
+		var self = this;
 
 		var dayToMatch = this.props.displayed;
 
@@ -45,7 +51,6 @@ var Week = React.createClass({
 			});
 		});
 
-		console.log(displayedWeek);
 
 		var caption = displayedWeek[0][0].month + ' ' + displayedWeek[0][0].dayIndex + " - " + displayedWeek[0][6].month + " " + displayedWeek[0][6].dayIndex;
 
@@ -91,6 +96,7 @@ var Week = React.createClass({
 			});
 
 			return {
+				moment: moment(day),
 				dayName: moment(day.date).format('dddd'),
 				taskList: formattedDay
 			}
@@ -111,6 +117,7 @@ var Week = React.createClass({
 				if(hoursTasks[0].tasks.length > 0) {
 
 					return {
+						moment: day.moment,
 						time: time,
 						dayName: day.dayName,
 						tasks: hoursTasks[0].tasks,
@@ -121,6 +128,7 @@ var Week = React.createClass({
 				else {
 
 					return {
+						moment: day.moment,
 						time: time,
 						dayName: day.dayName,
 						tasks: [],
@@ -146,11 +154,11 @@ var Week = React.createClass({
 					}
 
 					return (
-						<li key={index}>
+						<li onClick={self.handleSelectDay.bind(null, day)} key={index}>
 							{holidays}
 							<div className="info">
-								<Occasions occasions={day.tasks} />
-								<Tasks tasks={day.tasks} />
+								<Occasions occasions={day.tasks} filter={self.props.filter} />
+								<Tasks tasks={day.tasks} filter={self.props.filter} />
 							</div>
 						</li>
 
@@ -176,7 +184,7 @@ var Week = React.createClass({
 		return (
 				<div className="week-view">
 					<DisplayHeader caption={caption} updateAction={this.handleUpdateWeek} />
-					<div className="week days-header mdl-layout__header-row mdl-shadow--2dp">
+					<div className="week days-header mdl-layout__header-row mdl-shadow--1dp">
 							<ul>
 								<li className="time-zone">CDT</li>
 								<li>Sunday</li>
