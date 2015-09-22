@@ -39,6 +39,7 @@
   font-size: 0.6rem;
   color: black;
   font-family: "Muli";
+  font-weight: 400;
 }
 #app .info > div h3.occasion {
   border-left: 5px solid #FFC926;
@@ -63,6 +64,7 @@
   font-size: 0.6rem;
   color: black;
   font-family: "Muli";
+  font-weight: 400;
   padding: 0.25rem 0 0.25rem 0.5rem;
   border-left: 5px solid #1DE9B6;
   background: repeating-linear-gradient(-45deg, #CCEDE5, #CCEDE5 2px, white 2px, white 3px);
@@ -171,6 +173,7 @@
   display: block;
   margin: 1rem auto;
   font-family: "Muli";
+  font-weight: 400;
   color: #777;
 }
 #app .week-display .time-row, #app .day-display .time-row {
@@ -353,6 +356,7 @@
   color: white;
   background-color: #00B9FF;
   font-family: Muli;
+  font-weight: 400;
   text-align: center;
   margin-top: 0;
 }
@@ -367,6 +371,7 @@
   border-radius: 4px;
   color: #00B9FF;
   font-family: Muli;
+  font-weight: 400;
   display: block;
   margin: 0 auto;
   padding: 0.5rem 1.5rem;
@@ -390,6 +395,7 @@
   font-style: normal;
   font-size: 0.875rem;
   font-family: "Muli";
+  font-weight: 400;
   letter-spacing: 1px;
 }
 #app .sidebar .sidebar-bottom {
@@ -407,9 +413,11 @@
 }
 #app .sidebar .sidebar-bottom h5, #app .sidebar .sidebar-bottom h4 {
   color: #525252;
-  font-family: "Muli 400";
+  font-family: "Muli";
+  font-weight: 400;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  font-weight: 400;
 }
 #app .sidebar .sidebar-bottom h5.false, #app .sidebar .sidebar-bottom h4.false {
   display: none;
@@ -511,6 +519,7 @@
   margin-bottom: 0.5rem;
   color: black;
   font-family: "Muli";
+  font-weight: 400;
   border-radius: 2px;
 }
 #app .filter-box .filter span {
@@ -551,6 +560,7 @@
   font-size: 0.875rem;
   color: #7780BF;
   font-family: "Muli";
+  font-weight: 400;
   margin-bottom: 1rem;
   line-height: 1;
 }
